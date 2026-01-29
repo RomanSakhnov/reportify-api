@@ -1,0 +1,53 @@
+# Ignore bundler config.
+/.bundle
+
+# Ignore all logfiles and tempfiles.
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+# Ignore pidfiles, but keep the directory.
+/tmp/pids/*
+!/tmp/pids/
+!/tmp/pids/.keep
+
+# Ignore uploaded files in development.
+/storage/*
+!/storage/.keep
+/tmp/storage/*
+!/tmp/storage/
+!/tmp/storage/.keep
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key
+/config/credentials/*.key
+
+# Ignore environment variables
+.env
+.env.*
+!.env.example
+!.env.production.example
+
+# Ignore Kamal deployment secrets
+/.kamal/secrets
+/.kamal/secrets-*
+
+# Ignore database dumps
+*.dump
+*.sql
+*.sqlite3
+
+# Ignore coverage reports
+/coverage
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db

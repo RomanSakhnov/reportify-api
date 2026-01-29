@@ -1,0 +1,17 @@
+# Sidekiq configuration
+:concurrency: 5
+:max_retries: 3
+
+# Queues with priorities
+:queues:
+  - default
+  - mailers
+  - low_priority
+
+# Schedule for periodic jobs (requires sidekiq-cron gem for production use)
+# For development, you can manually trigger: ReportGeneratorWorker.perform_async
+:schedule:
+  report_generator:
+    cron: "0 2 * * *" # Run daily at 2 AM
+    class: ReportGeneratorWorker
+    description: "Generate daily report data"
