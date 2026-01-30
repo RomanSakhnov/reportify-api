@@ -1,0 +1,51 @@
+# Kamal deploy config — minimal setup
+# Deploy: kamal deploy
+# App is reachable on host port 3002 (container port 3000)
+
+service: reportify-api
+image: reportify-api
+
+# Local registry: Kamal runs a registry container, no Docker Hub account or password needed.
+registry:
+  server: localhost:5555
+  username: kamal
+
+servers:
+  web:
+    hosts:
+      - rs-development.net
+    options:
+      publish:
+        - "3002:3000"
+    proxy: false
+
+env:
+  clear:
+    RAILS_ENV: production
+    RAILS_LOG_TO_STDOUT: "true"
+    DB_HOST: reportify-api-db
+    DB_USERNAME: postgres
+  secret:
+    - RAILS_MASTER_KEY
+    - SECRET_KEY_BASE
+    - JWT_SECRET_KEY
+
+# PostgreSQL: trust auth (no password). App connects to reportify-api-db on the kamal network.
+accessories:
+  db:
+    image: postgres:15
+    host: rs-development.net
+    env:
+      clear:
+        POSTGRES_DB: reportify_production
+        POSTGRES_USER: postgres
+        POSTGRES_HOST_AUTH_METHOD: trust
+    directories:
+      - reportify_db_data:/var/lib/postgresql/data
+
+builder:
+  arch: amd64
+
+ssh:
+  user: rs-dev
+  port: 2121

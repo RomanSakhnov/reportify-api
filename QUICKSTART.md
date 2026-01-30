@@ -29,17 +29,17 @@ You'll need:
 
 ```bash
 # This sets up Docker, Traefik, PostgreSQL, and Redis on your server
-bin/kamal setup -c config/deploy.production.yml
+kamal setup -c config/deploy.yml
 ```
 
 ### Step 3: Deploy
 
 ```bash
 # Deploy using the custom script (includes cleanup)
-bin/deploy.production
+bin/deploy
 
 # Or deploy directly with Kamal
-bin/kamal deploy -c config/deploy.production.yml
+kamal deploy -c config/deploy.yml
 ```
 
 ### Step 4: Access Your Application
@@ -77,25 +77,25 @@ Your app will be available at:
 
 ```bash
 # View logs
-bin/kamal app logs --follow -c config/deploy.production.yml
+kamal app logs --follow -c config/deploy.yml
 
 # Rails console
-bin/kamal console -c config/deploy.production.yml
+kamal console -c config/deploy.yml
 
 # SSH into container
-bin/kamal shell -c config/deploy.production.yml
+kamal shell -c config/deploy.yml
 
 # Run migrations
-bin/kamal app exec "bin/rails db:migrate" -c config/deploy.production.yml
+kamal app exec "bin/rails db:migrate" -c config/deploy.yml
 
 # Restart app
-bin/kamal app boot -c config/deploy.production.yml
+kamal app boot -c config/deploy.yml
 
 # Check status
-bin/kamal app details -c config/deploy.production.yml
+kamal app details -c config/deploy.yml
 
 # Rollback
-bin/kamal app rollback -c config/deploy.production.yml
+kamal app rollback -c config/deploy.yml
 ```
 
 ## 🔐 Security Notes
@@ -122,7 +122,7 @@ ssh-add ~/.ssh/your_key
 
 ### Port conflicts
 
-The `bin/deploy.production` script automatically cleans up old containers.
+`bin/deploy` loads `.env.production` and runs `kamal deploy`.
 If issues persist, manually stop containers:
 
 ```bash
@@ -134,20 +134,20 @@ ssh -p 2121 rs-dev@rs-development.net "docker stop <container_id>"
 
 ```bash
 # Check PostgreSQL status
-bin/kamal accessory details db -c config/deploy.production.yml
+kamal accessory details db -c config/deploy.yml
 
 # View PostgreSQL logs
-bin/kamal accessory logs db -c config/deploy.production.yml
+kamal accessory logs db -c config/deploy.yml
 ```
 
 ### App won't start
 
 ```bash
 # Check application logs
-bin/kamal app logs -c config/deploy.production.yml
+kamal app logs -c config/deploy.yml
 
 # Verify environment variables
-bin/kamal app exec "env | grep RAILS" -c config/deploy.production.yml
+kamal app exec "env | grep RAILS" -c config/deploy.yml
 ```
 
 ## 📚 Full Documentation
@@ -164,4 +164,4 @@ Current ports (configured to avoid conflicts):
 - PostgreSQL: 5433 → 5432
 - Redis: 6380 → 6379
 
-To change ports, edit `config/deploy.production.yml` and update the `bin/deploy.production` script accordingly.
+To change ports, edit `config/deploy.yml` (servers.web.options.publish).

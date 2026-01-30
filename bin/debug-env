@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+# Run inside container to get full stack trace: ruby bin/debug-env
+# Or: bundle exec rails db:prepare --trace
+puts 'Loading Rails environment with full trace...'
+require_relative '../config/application'
+Rails.application.initialize!

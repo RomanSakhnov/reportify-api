@@ -1,5 +1,5 @@
 Devise.setup do |config|
-  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  config.mailer_sender = 'admin@example.com'
 
   require 'devise/orm/active_record'
 
@@ -16,7 +16,9 @@ Devise.setup do |config|
 
   # JWT configuration
   config.jwt do |jwt|
-    jwt.secret = ENV.fetch('JWT_SECRET_KEY', Rails.application.credentials.secret_key_base)
+    jwt.secret = ENV.fetch('JWT_SECRET_KEY') do
+      raise 'JWT_SECRET_KEY environment variable must be set'
+    end
     jwt.dispatch_requests = [
       ['POST', %r{^/api/v1/auth/login$}]
     ]

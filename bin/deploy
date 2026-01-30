@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -e
+
+# Load .env.production so secrets are available for Kamal
+if [ -f .env.production ]; then
+  set -a
+  # shellcheck source=/dev/null
+  source .env.production
+  set +a
+fi
+
+# Boot Postgres first so app can connect during deploy/migrations
+echo "Booting database..."
+kamal accessory boot db
+
+kamal deploy "$@"

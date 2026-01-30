@@ -2,9 +2,6 @@
 # Demonstrates dry-monads with do notation for chaining operations
 # Returns Success with token or Failure with error message
 class Authentication::LoginService < ApplicationService
-
-  
-
   def initialize(params)
     @params = params
   end
@@ -21,7 +18,7 @@ class Authentication::LoginService < ApplicationService
   private
 
   def validate_params
-    result = Contracts::AuthenticationContract.new.call(@params)
+    result = AuthenticationContract.new.call(@params)
 
     if result.success?
       success(result.to_h)

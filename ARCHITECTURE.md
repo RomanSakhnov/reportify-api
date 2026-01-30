@@ -140,12 +140,12 @@ Response → JWT Token
 Local Machine               Server (rs-development.net)
 ─────────────              ────────────────────────────
 
-1. bin/deploy.production
+1. bin/deploy
    │
    ├─ Cleanup old containers
    │  └─ SSH → Stop/Remove old containers
    │
-   └─ bin/kamal deploy
+   └─ kamal deploy
       │
       ├─ 2. Build Docker Image
       │     └─ docker build
@@ -250,7 +250,7 @@ Docker Containers (environment)
 ### Vertical Scaling
 
 ```yaml
-# In deploy.production.yml
+# In deploy.yml
 servers:
   web:
     options:
@@ -274,10 +274,10 @@ Infrastructure Level:
   • Sidekiq logs - Background jobs
 
 Commands:
-  bin/kamal app logs
-  bin/kamal accessory logs db
-  bin/kamal accessory logs redis
-  bin/kamal accessory logs sidekiq
+  kamal app logs
+  kamal accessory logs db
+  kamal accessory logs redis
+  kamal accessory logs sidekiq
 ```
 
 ## Backup Strategy
@@ -306,7 +306,7 @@ Commands:
 ```
 Issue Detected
       ↓
-bin/kamal app rollback
+kamal app rollback
       ↓
 Switch to Previous Image
       ↓
@@ -340,7 +340,7 @@ Sidekiq
 Project Root
 │
 ├── config/
-│   └── deploy.production.yml     → Kamal config
+│   └── deploy.yml     → Kamal config
 │
 ├── .kamal/
 │   └── secrets                    → Environment loader
@@ -348,7 +348,7 @@ Project Root
 ├── Dockerfile                     → Container image
 ├── .dockerignore                  → Build exclusions
 ├── bin/
-│   ├── deploy.production          → Deployment script
+│   ├── deploy          → Deployment script
 │   ├── docker-entrypoint          → Container startup
 │   └── check-deployment           → Pre-flight checks
 │

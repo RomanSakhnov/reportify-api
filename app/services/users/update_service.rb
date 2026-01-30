@@ -20,7 +20,7 @@ module Users
       params_to_validate = @params.dup
       params_to_validate.delete(:password) if params_to_validate[:password].blank?
 
-      result = Contracts::UserContract.new.call(params_to_validate)
+      result = UserContract.new.call(params_to_validate)
 
       if result.success?
         success(result.to_h)

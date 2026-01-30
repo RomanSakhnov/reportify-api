@@ -22,37 +22,37 @@ Your frontend server serves the application with HTTPS and forwards API calls to
 Deploy the app:
 
 ```bash
-bin/deploy.production
+bin/deploy
 ```
 
 Watch the logs:
 
 ```bash
-bin/kamal app logs --follow -c config/deploy.production.yml
+kamal app logs --follow -c config/deploy.yml
 ```
 
 Check if everything's running:
 
 ```bash
-bin/kamal app details -c config/deploy.production.yml
+kamal app details -c config/deploy.yml
 ```
 
 Open a Rails console:
 
 ```bash
-bin/kamal console -c config/deploy.production.yml
+kamal console -c config/deploy.yml
 ```
 
 Run database migrations:
 
 ```bash
-bin/kamal app exec "bin/rails db:migrate" -c config/deploy.production.yml
+kamal app exec "bin/rails db:migrate" -c config/deploy.yml
 ```
 
 Restart the app:
 
 ```bash
-bin/kamal app boot -c config/deploy.production.yml
+kamal app boot -c config/deploy.yml
 ```
 
 ## Ports
@@ -66,10 +66,10 @@ bin/kamal app boot -c config/deploy.production.yml
 
 ## Key Files
 
-`config/deploy.production.yml` - Main Kamal configuration  
+`config/deploy.yml` - Main Kamal configuration  
 `.env.production` - Production secrets (don't commit this!)  
 `Dockerfile` - Container image definition  
-`bin/deploy.production` - Deployment script with cleanup
+`bin/deploy` - Deployment script with cleanup
 
 ## Security Notes
 
@@ -108,8 +108,8 @@ Make sure you've:
 - Set up your frontend proxy
 - Updated CORS to allow your frontend domain
 
-First time: `bin/kamal setup`  
-After that: `bin/deploy.production`
+First time: `kamal setup`  
+After that: `bin/deploy`
 
 ## Common Issues
 
@@ -117,7 +117,7 @@ After that: `bin/deploy.production`
 
 **Connection refused?** Check that port 3002 isn't blocked by a firewall
 
-**502 errors from frontend?** The API might not be running—check with `bin/kamal app details`
+**502 errors from frontend?** The API might not be running—check with `kamal app details`
 
 ## Health Checks
 
@@ -137,7 +137,7 @@ curl https://your-frontend.com/api/up
 
 1. Set up `.env.production` with your secrets
 2. Run `bin/check-deployment` to verify everything
-3. Deploy with `bin/kamal setup` (first time) or `bin/deploy.production`
+3. Deploy with `kamal setup` (first time) or `bin/deploy`
 4. Configure your frontend proxy
 5. Update CORS settings
 6. Test the integration

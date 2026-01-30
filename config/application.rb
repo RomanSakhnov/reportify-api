@@ -7,6 +7,7 @@ require 'active_job/railtie'
 require 'active_record/railtie'
 require 'action_controller/railtie'
 require 'action_view/railtie'
+require 'action_mailer/railtie'
 require 'rails/test_unit/railtie'
 
 # Require the gems listed in Gemfile, including any gems
@@ -21,7 +22,7 @@ module ReportifyApi
     # Configuration for the application, engines, and railties goes here.
     config.api_only = true
 
-    # Autoload lib and app/contracts directories
+    # Autoload lib and app/contracts (each file defines one constant, e.g. AuthenticationContract)
     config.autoload_paths << Rails.root.join('lib')
     config.autoload_paths << Rails.root.join('app', 'contracts')
     config.eager_load_paths << Rails.root.join('lib')
@@ -30,26 +31,10 @@ module ReportifyApi
     # Sidekiq as ActiveJob adapter
     config.active_job.queue_adapter = :sidekiq
 
-    # CORS configuration
-    config.middleware.insert_before 0, Rack::Cors do
-      allow do
-        # Allow your frontend domains
-        origins 'rs-test.net',
-                'www.rs-test.net',
-                'reportify.rs-development.net',
-                'https://rs-test.net',
-                'https://www.rs-test.net',
-                'https://reportify.rs-development.net',
-                'http://localhost:3000', # For local development
-                'http://localhost:5173'  # For Vite dev server
+    # CORS is configured in config/initializers/cors.rb
 
-        resource '*',
-                 headers: :any,
-                 methods: %i[get post put patch delete options head],
-                 credentials: true, # Allow cookies/auth headers
-                 expose: ['Authorization'] # Expose Authorization header for JWT
-      end
-    end
+    # Mailer default from address
+    config.action_mailer.default_options = { from: 'admin@example.com' }
 
     # Timezone
     config.time_zone = 'UTC'

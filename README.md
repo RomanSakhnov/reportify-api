@@ -414,42 +414,14 @@ rails db:migrate
 
 ## Production Deployment
 
-The app is set up to deploy to a dedicated server using Kamal.
-
-### Quick Deploy
+Deploy with Kamal. The app is exposed on **port 3002** (container port 3000).
 
 ```bash
-# Check everything's ready
-bin/check-deployment
-
-# First time setup
-bin/kamal setup -c config/deploy.production.yml
-
-# Deploy
-bin/deploy.production
+kamal setup   # first time only
+bin/deploy    # or: kamal deploy
 ```
 
-### Deployment Details
-
-API runs at `http://rs-development.net:3002` on these ports:
-
-- App: 3002
-- PostgreSQL: 5433
-- Redis: 6380
-
-The API doesn't handle HTTPS directly—your frontend server should do that and proxy requests here.
-
-### Documentation
-
-[QUICKSTART.md](QUICKSTART.md) - Get started quickly  
-[DEPLOYMENT.md](DEPLOYMENT.md) - Full deployment guide
-
-### What You Need
-
-- Kamal installed (`gem install kamal`)
-- SSH access to server (port 2121)
-- `.env.production` file with your secrets
-- Rails master key
+See [DEPLOYMENT.md](DEPLOYMENT.md) for details. You need Kamal installed, SSH access to the server, and `RAILS_MASTER_KEY` (e.g. in `.env.production` or `.kamal/secrets`).
 
 ## Contributing
 

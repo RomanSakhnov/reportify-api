@@ -16,7 +16,7 @@ module Users
     private
 
     def validate_params
-      result = Contracts::UserContract.new.call(@params)
+      result = UserContract.new.call(@params)
 
       if result.success?
         success(result.to_h)

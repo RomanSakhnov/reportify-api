@@ -53,7 +53,7 @@ COPY --from=build /rails /rails
 
 # Create directories and set up non-root user for security
 RUN useradd rails --home /rails --shell /bin/bash && \
-    mkdir -p log storage tmp && \
+    mkdir -p log storage tmp tmp/pids && \
     chown -R rails:rails db log storage tmp
 USER rails:rails
 

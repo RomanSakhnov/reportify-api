@@ -22,4 +22,8 @@ Rails.application.configure do
   config.active_support.disallowed_deprecation = :raise
   config.active_support.disallowed_deprecation_warnings = []
   config.active_record.dump_schema_after_migration = false
+
+  # Action Mailer: log emails in development
+  config.action_mailer.delivery_method = :test
+  config.action_mailer.perform_deliveries = false
 end

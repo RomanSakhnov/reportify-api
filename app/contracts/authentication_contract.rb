@@ -1,8 +1,7 @@
 require 'dry/validation'
 
-# Authentication contract using dry-validation
 # Validates login credentials before processing
-class Contracts::AuthenticationContract < Dry::Validation::Contract
+class AuthenticationContract < Dry::Validation::Contract
   params do
     required(:email).filled(:string)
     required(:password).filled(:string)

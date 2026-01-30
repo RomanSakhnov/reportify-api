@@ -15,7 +15,7 @@ module Items
     private
 
     def validate_params
-      result = Contracts::ItemContract.new.call(@params)
+      result = ItemContract.new.call(@params)
 
       if result.success?
         success(result.to_h)

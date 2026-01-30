@@ -16,7 +16,7 @@ module Items
     private
 
     def validate_params
-      result = Contracts::ItemContract.new.call(@params.merge(user_id: @item.user_id))
+      result = ItemContract.new.call(@params.merge(user_id: @item.user_id))
 
       if result.success?
         success(result.to_h)

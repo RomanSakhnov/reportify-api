@@ -1,15 +1,24 @@
-# CORS Configuration
-#
-# CORS is configured in config/application.rb
-# 
-# Current allowed origins:
-# - rs-test.net (with and without www)
-# - reportify.rs-development.net
-# - localhost:3000 (for development)
-# - localhost:5173 (for Vite dev server)
-#
-# If you need to add more origins, edit config/application.rb
-# and redeploy with: bin/deploy.production
-#
-# Security note: CORS is set to allow credentials (cookies, auth headers)
-# which is necessary for JWT authentication to work properly.
+# Be sure to restart your server when you modify this file.
+
+Rails.application.config.middleware.insert_before 0, Rack::Cors do
+  allow do
+    origins(
+      'rs-test.net',
+      'www.rs-test.net',
+      'reportify.rs-development.net',
+      'https://rs-test.net',
+      'https://www.rs-test.net',
+      'https://reportify.rs-development.net',
+      'http://localhost:3000',
+      'http://localhost:5173'
+    )
+
+    resource(
+      '*',
+      headers: :any,
+      methods: %i[get post put patch delete options head],
+      credentials: true,
+      expose: ['Authorization']
+    )
+  end
+end

@@ -82,10 +82,10 @@ fi
 
 # Check 6: Deployment configuration
 echo -n "Checking Kamal deployment config... "
-if [ -f "config/deploy.production.yml" ]; then
-    echo -e "${GREEN}✓${NC} config/deploy.production.yml exists"
+if [ -f "config/deploy.yml" ]; then
+    echo -e "${GREEN}✓${NC} config/deploy.yml exists"
 else
-    echo -e "${RED}✗${NC} config/deploy.production.yml not found"
+    echo -e "${RED}✗${NC} config/deploy.yml not found"
     ALL_GOOD=false
 fi
 
@@ -115,7 +115,7 @@ if [ "$ALL_GOOD" = true ]; then
     echo -e "${GREEN}✓ All checks passed! Ready to deploy.${NC}"
     echo ""
     echo "Run deployment with:"
-    echo "  bin/deploy.production"
+    echo "  bin/deploy"
     exit 0
 else
     echo -e "${RED}✗ Some checks failed. Please fix the issues above.${NC}"

@@ -141,7 +141,7 @@ end
 After changing CORS settings, redeploy:
 
 ```bash
-bin/deploy.production
+bin/deploy
 ```
 
 ## API Endpoints
@@ -359,14 +359,14 @@ curl https://your-frontend-domain.com/api/v1/items
 If you see CORS errors in the browser console:
 
 1. Make sure `config/initializers/cors.rb` includes your frontend domain
-2. Redeploy after changing CORS settings: `bin/deploy.production`
+2. Redeploy after changing CORS settings: `bin/deploy`
 
 ### 502 Bad Gateway
 
 Getting 502 errors from nginx?
 
-1. Check if the API is actually running: `bin/kamal app details -c config/deploy.production.yml`
-2. Look at the API logs: `bin/kamal app logs -c config/deploy.production.yml`
+1. Check if the API is actually running: `kamal app details`
+2. Look at the API logs: `kamal app logs`
 3. Test the connection: `curl http://rs-development.net:3002/up`
 
 ### Authentication Issues
